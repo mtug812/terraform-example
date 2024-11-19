@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_instance" "apache-instance" {
   ami           = var.ec2_ami
   instance_type = var.ec2_instance_type
+  availability_zone = var.availability_zone
   subnet_id     = aws_subnet.public-subnet.id
   vpc_security_group_ids = [
     aws_security_group.apache_sg.id,
@@ -18,6 +19,7 @@ resource "aws_instance" "apache-instance" {
 resource "aws_instance" "db-instance" {
   ami           = var.ec2_ami
   instance_type = var.ec2_instance_type
+  availability_zone = var.availability_zone
   subnet_id     = aws_subnet.public-subnet.id
   vpc_security_group_ids = [
     aws_security_group.mysql_sg.id,
@@ -38,7 +40,7 @@ resource "aws_vpc" "main-vpc" {
 resource "aws_subnet" "public-subnet" {
   vpc_id                  = aws_vpc.main-vpc.id
   cidr_block              = "10.0.0.0/20"
-  availability_zone       = "eu-central-1a"
+  availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
 }
 

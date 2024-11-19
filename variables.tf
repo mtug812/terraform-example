@@ -18,6 +18,24 @@ variable "port_egress" {
     protocol    = string
     cidr_blocks = list(string)
   })
+  variable "availability_zone" {
+  description = "The availability zone for the instances"
+  type        = string
+  default     = "eu-central-1a"  # sau orice altă zonă disponibilă
+}
+
+variable "region" {
+  description = "The AWS region for the resources"
+  type        = string
+  default     = "eu-central-1"  # sau altă regiune dorită
+}
+
+variable "public_subnet_cidr" {
+  description = "CIDR block for the public subnet"
+  type        = string
+  default     = "10.0.0.0/20"  # sau alt CIDR block dorit
+}
+
   default = {
     from_port   = 0
     to_port     = 0
